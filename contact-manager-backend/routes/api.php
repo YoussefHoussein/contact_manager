@@ -16,6 +16,7 @@ use App\Http\Controllers\ContactController;
 Route::post('/add-contact',[ContactController::class , 'addContact']);
 Route::post('/delete-contact',[ContactController::class , 'deleteContact']);
 Route::post('/edit-contact',[ContactController::class , 'editContact']);
+Route::post('/get-contact',[ContactController::class , 'getContact']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

@@ -114,5 +114,10 @@ class ContactController extends Controller
             'longitude' => $longitude,
         ], 200);
     }
+    public function getContact(){
+        $contacts = Contact::all();
+
+        return $contacts;
+    }
 
 }
