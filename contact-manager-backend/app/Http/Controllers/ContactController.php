@@ -14,21 +14,39 @@ class ContactController extends Controller
         $latitude = $request->latitude;
         $longitude = $request->longitude;
 
-        $address = new Address();
+        $contacts = Contact::all();
 
-        $address->latitude = $latitude;
-        $address->longitude = $longitude;
-        $address->save();
+        foreach($contacts as $contact){
+            if($contact->name == $name){
+                return response()->json([
+                    'status' => 'Failed',
+                    'message' => 'Contact name already exists',
+                ], 200); 
+            }
+            else if($contact->phone_number == $phone_number){
+                return response()->json([
+                    'status' => 'Failed',
+                    'message' => 'Contact phone number already exists',
+                ], 200);
+            }
+            else{
+                $address = new Address();
 
-        $contact = new Contact();
-        $contact->name = $name;
-        $contact->phone_number = $phone_number;
-        $contact->address_id = $address->id;
-        $contact->save();
+                $address->latitude = $latitude;
+                $address->longitude = $longitude;
+                $address->save();
 
-        return response()->json([
-            'status' => 'Success',
-        ], 200);
+                $contact = new Contact();
+                $contact->name = $name;
+                $contact->phone_number = $phone_number;
+                $contact->address_id = $address->id;
+                $contact->save();
+
+                return response()->json([
+                    'status' => 'Success',
+                ], 200);
+                }
+        }
     }
     public function deleteContact(Request $request){
         if($request->id){
@@ -43,8 +61,9 @@ class ContactController extends Controller
                 return response()->json([
                     'status' => 'Failed',
                     'message' => 'Contact not exists',
-                ], 200);;
+                ], 200);
             }
         }
     }
+
 }
