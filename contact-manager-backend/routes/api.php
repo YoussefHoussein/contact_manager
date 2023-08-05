@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ContactController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/add-contact',[ContactController::class , 'addContact']);
+Route::post('/delete-contact',[ContactController::class , 'deleteContact']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
