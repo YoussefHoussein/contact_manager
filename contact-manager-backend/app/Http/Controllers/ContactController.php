@@ -14,7 +14,13 @@ class ContactController extends Controller
         $phone_number = $request->phone_number;
         $latitude = $request->latitude;
         $longitude = $request->longitude;
-        
+
+        if(!$name || !$phone_number || !$latitude || !$longitude){
+            return response()->json([
+                'status' => 'Failed',
+                'message' => 'Empty field',
+            ], 200); 
+        }
         $contacts = Contact::all();
         foreach($contacts as $contact){
             
@@ -71,53 +77,6 @@ class ContactController extends Controller
             }
         }
     }
-    public function editContact(Request $request){
-        $id = $request->id;
-        $name = $request->name;
-        $phone_number = $request->phone_number;
-        $latitude = $request->latitude;
-        $longitude = $request->longitude;
-
-        $contacts = Contact::all();
-        foreach($contacts as $contact){
-            if($contact->name == $name){
-                return response()->json([
-                    'status' => 'Failed',
-                    'message' => 'Contact name already exists',
-                ], 200); 
-            }
-            else if($contact->phone_number == $phone_number){
-                return response()->json([
-                    'status' => 'Failed',
-                    'message' => 'Contact phone number already exists',
-                ], 200);
-            }
-            
-        }
-
-        $contact = Contact::find($id);
-
-        $address = Address::find($contact->address_id);
-        
-        $contact->name = $name;
-        $contact->phone_number = $phone_number;
-        $address->latitude = $latitude;
-        $address->longitude = $longitude;
-        $contact->save();
-        $address->save();
-
-        return response()->json([
-            'status' => 'Success',
-            'name' => $name,
-            'phone_number' => $phone_number,
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-        ], 200);
-    }
-    public function getContact(){
-        $contacts = Contact::all();
-
-        return $contacts;
-    }
-
+   
+    
 }
