@@ -1,0 +1,30 @@
+.card-container{
+    position: relative;
+    width: 20vw;
+    height: 20rem;
+    border-radius: 10px;
+    background-color: lightblue;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+.image{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    top: -22%;
+}
+.remove{
+    background-color: red;
+    width: 5rem;
+    height: 2rem;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+.cont{
+    margin: 10px;
+    padding: 2%;
+}
