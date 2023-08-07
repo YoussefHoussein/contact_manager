@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import "./index.css";
-const ContactForm = ({contacts , setContacts}) => {
+const ContactForm = ({contacts , setContacts,geoCode,setGeoCode}) => {
   const [name , setName] = useState("");
   const [phone_number , setPhoneNumber] = useState("");
   const [latitude , setLatitude] = useState("");
@@ -62,7 +62,8 @@ const ContactForm = ({contacts , setContacts}) => {
           longitude: longitude,
         }
         setContacts([...contacts,newCard]);
-
+        setGeoCode([...geoCode,[latitude,longitude]])
+        
         setName("")
         setPhoneNumber("")
         setLatitude("")

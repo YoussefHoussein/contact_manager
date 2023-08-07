@@ -1,6 +1,7 @@
 import React from 'react'
 import "./index.css";
 import axios from 'axios';
+
 const ContactCard = ({name,phone_number,latitude,longitude}) => {
   const deleteContact = () => {
     axios.post('http://127.0.0.1:8000/api/delete-contact',{
@@ -13,6 +14,8 @@ const ContactCard = ({name,phone_number,latitude,longitude}) => {
   }
 
   return (
+ 
+    
     <div className='cont'>
         <div className='card-container'>
       
@@ -26,7 +29,8 @@ const ContactCard = ({name,phone_number,latitude,longitude}) => {
       <button className='remove' onClick={() => deleteContact()}>Remove</button>
     </div>
   </div>
-    
+  
+  
   )
 };
 export default ContactCard;
